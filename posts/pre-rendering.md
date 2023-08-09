@@ -3,9 +3,13 @@ title: "Projects"
 date: "2023-08-08"
 ---
 
-Next.js has two forms of pre-rendering: **Static Generation** and **Server-side Rendering**. The difference is in **when** it generates the HTML for a page.
+**I have done many projects so far. Few of them are here:**
 
-- **Static Generation** is the pre-rendering method that generates the HTML at **build time**. The pre-rendered HTML is then _reused_ on each request.
-- **Server-side Rendering** is the pre-rendering method that generates the HTML on **each request**.
-
-Importantly, Next.js lets you **choose** which pre-rendering form to use for each page. You can create a "hybrid" Next.js app by using Static Generation for most pages and using Server-side Rendering for others.
+- Develop a client side and a Servlet program for ATM.
+- Develop JavaFX UI to calculate age of the user.
+- Develop application for Fitness Club using Java and MySQL.
+- Design Portfolio Webpage in Figma.
+- Design and Create Portfolio Website using Figma and Nextjs.
+- Design and Create Journey Beans Coffee Shop Website using Figma and Nextjs.
+- Write playwright tests, GitHub actions and deployment.
+- Google Analytics and Mailchimp.
