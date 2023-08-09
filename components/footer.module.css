@@ -1,0 +1,37 @@
+/* footer.module.css */
+
+.footer {
+  background-color: #6b87f6;
+  color: #0a0a0a;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex; /* Add flex display to align items horizontally */
+  justify-content: space-between; /* Create space between the two sides */
+  align-items: center; /* Align items vertically in the center */
+  flex-direction: row-reverse; 
+}
+
+.socialLinks {
+  display: grid; /* Use grid display for a two-column layout */
+  grid-template-columns: repeat(2, 1fr); /* Create two columns of equal width */
+  gap: 10px; /* Add some gap between the links */
+}
+
+.socialLinks a {
+  display: flex; /* Use flex display for horizontal alignment */
+  justify-content: center; /* Center the links horizontally */
+}
+
+.socialLinks img {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.footer p {
+  margin: 0;
+}
