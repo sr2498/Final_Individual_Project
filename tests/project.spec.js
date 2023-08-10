@@ -1,124 +1,90 @@
 const { test, expect } = require('@playwright/test')
-// CHange to localhost on which it is running on
+
+// Base and subpage URLs
 const nextjstest = 'http://localhost:3000/'
-const nextjstestssr = 'http://localhost:3000/posts/ssg-ssr'
-const nextjsrender = 'http://localhost:3000/posts/pre-rendering'
+const skillsPageURL = 'http://localhost:3000/posts/skills'
+const projectsPageURL = 'http://localhost:3000/posts/projects'
+
+// External scripts
 const gaScriptURL = 'https://www.googletagmanager.com/gtag/js'
 
-// Test to check word 'Blog' in the Header
-test('Check Header for `name`', async ({ page }) => {
+// ------ HEADER RELATED TESTS ------
+
+// Test to check Header for name
+test('Check Header for `name` on the main page', async ({ page }) => {
   await page.goto(nextjstest)
   const headerText = await page.textContent('h2')
-  await expect(headerText).toContain('Blog')
+  await expect(headerText.toLowerCase()).toContain('sandhya rani')
 })
+
+// Test to check Your name of Skills Page
+test('Check Header for YourName on Skills page', async ({ page }) => {
+  await page.goto(skillsPageURL)
+  await page.waitForLoadState('load')
+  const name = 'SANDHYA RANI'
+  const headerSelector = `header h2:has-text("${name}")`
+  await expect(page.locator(headerSelector)).toBeVisible()
+})
+
+// Test to check for your name on Project page header
+test('Check Header for Your Name on Project Page', async ({ page }) => {
+  await page.goto(projectsPageURL)
+  await page.waitForLoadState('load')
+
+  const name = 'Sandhya Rani'
+  const headerSelector = `header h2:has-text("${name}")`
+  await expect(page.locator(headerSelector)).toBeVisible()
+})
+
+// ------ HOME PAGE TESTS ------
 
 // Test checks if a yourname is present
 test('Check Yourname Presence on Home', async () => {
-  const name = 'Sandhya Rani'
+  const name = 'SANDHYA RANI'
   expect(name).toBeDefined()
-})
-
-// Test to check Your name of SSR Page
-test('Check Header for YourName on SSR page', async ({ page }) => {
-  await page.goto(nextjstestssr)
-  await page.waitForLoadState('load')
-  const name = 'Sandhya Rani'
-  const headerSelector = `header h2:has-text("${name}")`
-  await expect(page.locator(headerSelector)).toBeVisible()
-})
-
-// This test checks if the <h1> in the <article> in SSR page contains specific content
-test('Check <h1> in <article> for Specific Content on SSR page', async ({ page }) => {
-  await page.goto(nextjstestssr)
-  const articleSelector = 'article'
-  const expectedContent = 'When to Use Static Generation v.s. Server-side Rendering'
-  const headerSelector = `${articleSelector} h1:has-text("${expectedContent}")`
-
-  await expect(page.locator(headerSelector)).toBeVisible()
-})
-
-// Test to check for yourname on render page header
-test('Check Header for Your Name on Render Page', async ({ page }) => {
-  await page.goto(nextjsrender)
-  await page.waitForLoadState('load')
-
-  const name = 'Sandhya Rani'
-  const headerSelector = `header h2:has-text("${name}")`
-  await expect(page.locator(headerSelector)).toBeVisible()
-})
-
-// This test checks if the <h1> in the <article> of Pre-Rendering Page contains specific content
-test('Check <h1> in <article> for Specific Content on Render Page', async ({ page }) => {
-  await page.goto(nextjsrender)
-  const articleSelector = 'article'
-  const expectedContent = 'Two Forms of Pre-rendering'
-  const headerSelector = `${articleSelector} h1:has-text("${expectedContent}")`
-
-  await expect(page.locator(headerSelector)).toBeVisible()
-})
-
-// This test checks that the responsive meta tag is present
-test('Check Responsive Meta Tag', async ({ page }) => {
-  await page.goto(nextjsrender)
-  const viewportMeta = await page.getAttribute('meta[name="viewport"]', 'content')
-  await expect(viewportMeta).toBe('width=device-width')
-})
-
-// This test checks that the responsive meta tag is present
-test('Check Responsive Meta Tag for Render', async ({ page }) => {
-  await page.goto(nextjstestssr)
-  const viewportMeta = await page.getAttribute('meta[name="viewport"]', 'content')
-  await expect(viewportMeta).toBe('width=device-width')
-})
-
-// Test for checking Click for SSR page navigation
-test('Test for SSR Navigator', async ({ page }) => {
-  await page.goto(nextjstest)
-  await page.getByText('When to Use Static Generation v.s. Server-side Rendering').click()
-  await page.waitForURL(nextjstestssr)
-  const currentURL = await page.url()
-  const expectedURL = nextjstestssr
-  expect(currentURL).toBe(expectedURL)
-})
-
-// Test to check Click for Pre-Rendering Navigation
-test('Test for Pre-Rendering Navigator', async ({ page }) => {
-  await page.goto(nextjstest)
-  await page.getByText('Two Forms of Pre-rendering').click()
-  await page.waitForURL(nextjsrender)
-  const currentURL = await page.url()
-  const expectedURL = nextjsrender
-  expect(currentURL).toBe(expectedURL)
-})
-
-// Test to Check Back Home from SSR page Navigation
-test('Test for SSR Back Home Nav', async ({ page }) => {
-  await page.goto(nextjstestssr)
-  await page.getByText('Back to home').click()
-  await page.waitForURL(nextjstest)
-  const currentURL = await page.url()
-  const expectedURL = nextjstest
-  expect(currentURL).toBe(expectedURL)
-})
-
-// Test to Check Back Home from Pre-Rendering page Navigation
-test('Test for Pre-Rendering Back Home Nav', async ({ page }) => {
-  await page.goto(nextjsrender)
-  await page.getByText('Back to home').click()
-  await page.waitForURL(nextjstest)
-  const currentURL = await page.url()
-  const expectedURL = nextjstest
-  expect(currentURL).toBe(expectedURL)
 })
 
 // Test to check if Google Analytics script is loaded
 test('Test for presence of Google Analytics script', async ({ page }) => {
   await page.goto(nextjstest)
-
-  // Test to check if the Google Analytics script is present on the page
   const isGAScriptPresent = await page.$$eval('script', (scripts, expectedURL) => {
     return scripts.some(script => script.src.includes(expectedURL))
-  }, gaScriptURL) // Passing gaScriptURL here
-
+  }, gaScriptURL)
   expect(isGAScriptPresent).toBe(true)
+})
+
+// ------ NAVIGATION TESTS ------
+
+// Test to Check Back Home from Skills page Navigation
+test('Test for SKills Back Home Nav', async ({ page }) => {
+  await page.goto(skillsPageURL)
+  await page.getByText('Back to home').click()
+  await page.waitForURL(nextjstest)
+  const currentURL = await page.url()
+  expect(currentURL).toBe(nextjstest)
+})
+
+// Test to Check Back Home from Projects page Navigation
+test('Test for Projects Back Home Nav', async ({ page }) => {
+  await page.goto(projectsPageURL)
+  await page.getByText('Back to home').click()
+  await page.waitForURL(nextjstest)
+  const currentURL = await page.url()
+  expect(currentURL).toBe(nextjstest)
+})
+
+// ------ META TAG TESTS ------
+
+// This test checks that the responsive meta tag is present on Projects page
+test('Check Responsive Meta Tag on Projects page', async ({ page }) => {
+  await page.goto(projectsPageURL)
+  const viewportMeta = await page.getAttribute('meta[name="viewport"]', 'content')
+  await expect(viewportMeta).toBe('width=device-width')
+})
+
+// This test checks that the responsive meta tag is present on Skills page
+test('Check Responsive Meta Tag on Skills Page', async ({ page }) => {
+  await page.goto(skillsPageURL)
+  const viewportMeta = await page.getAttribute('meta[name="viewport"]', 'content')
+  await expect(viewportMeta).toBe('width=device-width')
 })
