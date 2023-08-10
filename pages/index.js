@@ -79,7 +79,7 @@ export default function Home({ allPostsData }) {
           className="validate" 
           target="_blank"
         >
-          <h2>Join our Newsletter</h2>
+          <h2>Subscribe to My Newsletter</h2>
           <div className="mc-field-group">
             <label htmlFor="mce-EMAIL">Enter your Email Address to Subscribe <span className="asterisk">*</span></label>
             <input 
