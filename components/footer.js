@@ -9,16 +9,16 @@ const Footer = () => {
       <div className={styles.socialLinks}>
         {/* Replace 'your-linkedin-url', 'your-facebook-url', and 'your-github-url' with your actual profile URLs */}
         <a href='your-linkedin-url' target='_blank' rel='noopener noreferrer'>
-          <img src='/images/Linkdin logo.png' alt='LinkedIn' />
+          <img src='images/Linkdin logo.png' alt='LinkedIn' />
         </a>
         <a href='your-facebook-url' target='_blank' rel='noopener noreferrer'>
-          <img src='/images/facebook.png' alt='Facebook' />
+          <img src='images/facebook.png' alt='Facebook' />
         </a>
         <a href='your-github-url' target='_blank' rel='noopener noreferrer'>
-          <img src='/images/Github Logo.png' alt='GitHub' />
+          <img src='images/Github Logo.png' alt='GitHub' />
         </a>
         <a href='your-twitter-url' target='_blank' rel='noopener noreferrer'>
-          <img src='/images/twitter.png' alt='Twitter' />
+          <img src='images/twitter.png' alt='Twitter' />
         </a>
       </div>
       <p>© {new Date().getFullYear()} Sandhya Rani. All rights reserved.</p>
