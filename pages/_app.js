@@ -2,38 +2,46 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Navbar from '../components/navbar'
 import '../styles/global.css'
+import { googleAnalytics } from '../google-analytics';
 
-console.log("Inside _app.js");   
+console.log('Inside _app.js');
+console.log(googleAnalytics);
+
 function App ({ Component, pageProps }) {
-  const router = useRouter()
-  console.log(process.env.GA_MEASUREMENT_ID);
+  const router = useRouter();
+
   useEffect(() => {
-    // Only execute if the GA_MEASUREMENT_ID is defined
-    if (process.env.GA_MEASUREMENT_ID) {
-      // This function initializes GA and sends a pageview when the app first loads
-      console.log("GA Measurement ID found:", process.env.GA_MEASUREMENT_ID);  // <-- Console log
-      const handleRouteChange = (url) => {
-        window.gtag('config', process.env.GA_MEASUREMENT_ID, {
-          page_path: url
-        })
-      }
+    // Only execute this code if we're in the browser environment
+    if (typeof window !== 'undefined') {
+        // Check if googleAnalytics and its init method exist before calling
+        if (googleAnalytics && typeof googleAnalytics.init === 'function') {
+          googleAnalytics.init();  // Initialize Google Analytics
+        } else {
+          console.error("googleAnalytics or its init method is not available");
+        }
 
-      // When the component is mounted, we register the event to track route changes
-      router.events.on('routeChangeComplete', handleRouteChange)
+        // Your existing code for route change
+        if (process.env.NEXT_PUBLIC_DB_GA) {
+            const handleRouteChange = (url) => {
+                window.gtag('config', process.env.NEXT_PUBLIC_DB_GA, {
+                    page_path: url
+                });
+            };
 
-      // If the component is unmounted, we unregister the event
-      return () => {
-        router.events.off('routeChangeComplete', handleRouteChange)
-      }
+            router.events.on('routeChangeComplete', handleRouteChange);
+            return () => {
+                router.events.off('routeChangeComplete', handleRouteChange);
+            };
+        }
     }
-  }, [router.events])
+}, [router.events]);
 
   return (
     <>
       <Navbar />
       <Component {...pageProps} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

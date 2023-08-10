@@ -122,4 +122,3 @@ test('Test for presence of Google Analytics script', async ({ page }) => {
 
   expect(isGAScriptPresent).toBe(true)
 })
-
