@@ -40,7 +40,10 @@ This repository contains my final portfolio project for the Agile Web Developmen
   - Address and resolve issues, documenting the process.
 - **Deployment:**
   - Deploy portfolio using Vercel or GitHub Pages.
-  - Link to the live portfolio in the repository's readme.md.
+  - Link to the live portfolio : https://sr2498.github.io/Final_Individual_Project/
+ 
+  - ![Screenshot 2023-08-10 at 9 15 11 PM](https://github.com/sr2498/Final_Individual_Project/assets/134464080/89ea851a-e596-48aa-9e75-546243548a31)
+
 
 ## User Journey
 
