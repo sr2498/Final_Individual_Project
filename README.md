@@ -72,3 +72,9 @@ Total: 100 Points
 
 
 **Figma Design:** https://www.figma.com/file/TRrKSlHhAZB5HlAcBFrv6N/Flux---Figma-Build-Tutorial-(Starter)-(Community)?type=design&node-id=252%3A16&mode=design&t=VRNjU69VG8Wh7rKQ-1
+
+
+**Presentation:** 
+
+https://github.com/sr2498/Final_Individual_Project/assets/134464080/3cc74ea4-a928-4fdd-aedd-60c5aa949b30
+
