@@ -14,7 +14,6 @@ export async function getStaticProps () {
     }
   }
 }
-
 export default function Home ({ allPostsData }) {
   return (
     <Layout home>
@@ -26,7 +25,6 @@ export default function Home ({ allPostsData }) {
           type='text/css'
         />
       </Head>
-
       <Script strategy='beforeInteractive' src='https://code.jquery.com/jquery-3.6.0.min.js' />
       <Script strategy='beforeInteractive' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js' />
       <Script strategy='beforeInteractive'>
@@ -68,7 +66,6 @@ export default function Home ({ allPostsData }) {
           ))}
         </ul>
       </section>
-
       {/* Mailchimp Subscription Form */}
       <div id='mc_embed_signup'>
         <form
