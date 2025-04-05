@@ -19,7 +19,6 @@ function App ({ Component, pageProps }) {
       } else {
         console.error('googleAnalytics or its init method is not available')
       }
-
       // Your existing code for route change
       if (process.env.NEXT_PUBLIC_DB_GA) {
         const handleRouteChange = (url) => {
@@ -27,7 +26,6 @@ function App ({ Component, pageProps }) {
             page_path: url
           })
         }
-
         router.events.on('routeChangeComplete', handleRouteChange)
         return () => {
           router.events.off('routeChangeComplete', handleRouteChange)
@@ -35,7 +33,6 @@ function App ({ Component, pageProps }) {
       }
     }
   }, [router.events])
-
   return (
     <>
       <Navbar />
